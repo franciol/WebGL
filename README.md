@@ -10,3 +10,5 @@ Para Usar o Codigo:
         - Saida do arquivo 'res_VertexCount' para 'vertexCount' 
     
     - Rodar 'Entrega2.html'
+ 
+Resultado: https://franciol.github.io/WebGL/Entrega2.html
