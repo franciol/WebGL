@@ -48,7 +48,7 @@
             varying lowp vec4 vColor;
 
             void main() {
-                gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+                gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition * vec4(1.0, 0.5, 1.0, 1.0);
                 vColor = vec4(aVertexPosition.y*(1.0-aVertexPosition.y) , aVertexPosition.x*(1.0-aVertexPosition.y), (1.0-aVertexPosition.y), 1.0);
             }
         `;
@@ -6426,6 +6426,9 @@
 
         // Atualiza o valor da rotação
         squareRotation += deltaTime;
+        if(squareRotation * .7 > 3.14*2){
+            squareRotation = 0;
+        }
 
         gl.clearColor(0.0, 0.0, 0.0, 1.0);  // define cor para pintar de preto sem transparência
         gl.clearDepth(1.0);                 // Limpa o buffer de profundidade
@@ -6456,13 +6459,15 @@
 
         // Move a posição do desenho para onde queremos
         // desenhar o quadrado.
+
+
         mat4.translate(modelViewMatrix,    // matriz de destino
             modelViewMatrix,    // matriz para transladar
-            [0.0, 0.0, -4.0]);  // translação
+            [0.0, 0.0, -3.5]);  // translação
 
         mat4.rotate(modelViewMatrix,  // matriz de destino
             modelViewMatrix,  // matriz para rotacionar
-            .7,// quantidade de radianos a se rotacionar * 0.7
+            .9,// quantidade de radianos a se rotacionar * 0.7
             [1, 0, 0]);       // eixo para ser girar em volta
 
         mat4.rotate(modelViewMatrix,  // matriz de destino
@@ -6470,7 +6475,8 @@
             squareRotation * .7,// quantidade de radianos a se rotacionar * 0.7
             [0, 1, 0]);       // eixo para ser girar em volta
 
-
+       
+        
         // Diga ao WebGL como retirar as posições do
         // atributo vertexPosition do buffer
         {
